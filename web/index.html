@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>AWS IoT Button</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
   <style>
     body {
       margin-top: 50px;
@@ -26,6 +27,7 @@
 
   <script>
 
+    var now = (new Date).getTime()
     var $events = $('.events')
     var rootRef = new Firebase('https://aws-iot-button.firebaseio.com/')
     var eventsRef = rootRef.child('events')
@@ -36,7 +38,10 @@
 
     function renderItem(item) {
       var time = moment(item.timestamp).format('MMMM Do YYYY, h:mm:ss a')
-      var el = '<li><strong>' + item.clickType + '</strong>: ' + time + '</li>'
+      var el = $('<li><strong>' + item.clickType + '</strong>: ' + time + '</li>')
+      if (item.timestamp >= now) {
+        el.addClass('animated bounceInLeft')
+      }
       $events.prepend(el)
     }
 
