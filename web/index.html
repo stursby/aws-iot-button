@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS IoT Button</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <style>
+    body {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <h1>AWS IoT Button</h1>
+      <h4>Events</h4>
+      <ul class="events"></ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+  <script>
+
+    var $events = $('.events')
+    var rootRef = new Firebase('https://aws-iot-button.firebaseio.com/')
+    var eventsRef = rootRef.child('events')
+
+    eventsRef.on('child_added', function(snapshot) {
+      renderItem(snapshot.val())
+    })
+
+    function renderItem(item) {
+      var time = moment(item.timestamp).format('MMMM Do YYYY, h:mm:ss a')
+      var el = '<li><strong>' + item.clickType + '</strong>: ' + time + '</li>'
+      $events.prepend(el)
+    }
+
+  </script>
+
+</body>
+</html>
