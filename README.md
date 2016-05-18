@@ -40,3 +40,23 @@ Sample payload
 ```
 
 Lambda logs can be found in [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/), too.
+
+### Node
+
+You can also run a normal Dash button (or the IoT Button) using [node-dash-button](https://github.com/hortinstein/node-dash-button). Once the button is configured (on your local network), you can run the [bin/findbutton](https://github.com/hortinstein/node-dash-button/blob/master/bin/findbutton) script to detect your button’s MAC address.
+
+#### Example node script is located at `/node/app.js`
+
+To run it, `cd` into the `node` directory and install the dependecies.
+
+```bash
+npm install
+```
+
+Then run the app (must use `sudo`)
+
+```bash
+sudo node app.js
+```
+
+If eveything is confiured correctly you should see *Button pressed!* logged out in the Terminal.
